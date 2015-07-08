@@ -10,7 +10,7 @@ object CosineSimilarity {
     // cos(theta) = (A . B) / (||A|| ||B||)
     def calculateSimilarity(providerVector: Array[Int], userVector: Array[Int]): Double = {
 
-      assert(providerVector.size == userVector.size)
+      assert(providerVector.length == userVector.length)
 
       dotProduct(providerVector, userVector) / (euclideanNorm(providerVector) * euclideanNorm(userVector))
 
@@ -20,9 +20,7 @@ object CosineSimilarity {
     //TODO There must be a better way to do this with some scala-isms?
     private def dotProduct(x: Array[Int], y: Array[Int]): Int = {
       //zip makes 2 lists to list of tuples, then I map the tuples to multiply them
-      val zippedList = (x zip y).map({case (a: Int, b: Int) => a * b })
-
-      zippedList.sum
+      (x zip y).map({case (a: Int, b: Int) => a * b }).sum
     }
 
     //e.g. sqrt( x[0]^2 + x[1]^2 + ... + x[n]^2 )
